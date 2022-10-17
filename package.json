@@ -1,0 +1,22 @@
+{
+  "name": "curso-solid-y-clean-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "killall -9 node ; nodemon dist/app.js & tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint": "^8.25.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
