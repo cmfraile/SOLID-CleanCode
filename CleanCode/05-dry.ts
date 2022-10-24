@@ -1,9 +1,12 @@
 type size = 'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
-interface Product {name?:string|undefined,price?:number|undefined,size?:size|undefined}
-
+interface product {name?:string|undefined,price?:number|undefined,size?:size|undefined}
 class Product {
 
-    constructor({name,price,size}:Product){
+    private name;
+    private price;
+    private size;
+
+    constructor({name,price,size}:product){
         this.name = name||undefined;
         this.price = price||undefined;
         this.size = size||undefined;
