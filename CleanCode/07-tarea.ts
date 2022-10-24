@@ -37,7 +37,7 @@ class InputElement{
         this.htmlelement = new HtmlElement(id,type);
         this.inputattributes = new InputAttributes(value,placeholder,id);
         this.inputEvents = new InputEvents(value,placeholder,id)
-        console.log({this:this});
+        console.log(this);
     }
 
     public checkInputAttributesMethods(){
@@ -49,6 +49,6 @@ class InputElement{
 
 export const tarea07 = () => {
     const inputElementTest = new InputElement('12345','radio','valor','placeholder');
-    inputElementTest.checkInputAttributesMethods();
+    //inputElementTest.checkInputAttributesMethods();
 }
 
