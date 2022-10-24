@@ -53,7 +53,7 @@ class UserSettings extends User {
 
 }
 
-export const classes01main = () => {
+export const classes02main = () => {
     //const persona = new Person({name:'Carlos',gender:'M',birthdate:new Date('1993-03-19')});
     const configuracionDeUsuario = new UserSettings({
         name: 'Carlos',
