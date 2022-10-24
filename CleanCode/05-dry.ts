@@ -1,31 +1,48 @@
-type size = undefined|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
-interface Product{
-    name:string|undefined,
-    price:number|undefined,
-    size:size
-}
+type size = 'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
+interface Product {name?:string|undefined,price?:number|undefined,size?:size|undefined}
 
 class Product {
 
-    public name
-    public price
-    public size
-
     constructor({name,price,size}:Product){
-        this.name = name;
-        this.price = price;
-        this.size = size
+        this.name = name||undefined;
+        this.price = price||undefined;
+        this.size = size||undefined;
+        //console.log(Object.keys(this));
+    }
+
+    private propertiesNonUndefinedCheck(){
+
+        /*
+        Object.keys(this).map( (x:string) => {
+            if(this[x] == undefined){
+                throw new Error(`[${x}] es undefined y por tanto, no pasa el check`);
+            }
+        })
+        */
+
+        for (const key in this){
+            if(this[key] == undefined){
+                throw new Error(`[${key}] es undefined y por tanto, no pasa el check`);
+            }
+        }
+
     }
 
     public toString(){
-        if(this.name == undefined){console.log('El nombre debe de estar definido, como mínimo') ; return };
+
+        //El problema de DRY (don't repeat yourself) que tenemos aqui, es que para cada método, las lineas de validación se repite en cada método, y eso es código duplicado.
+        //if(this.name == undefined){console.log('El nombre debe de estar definido, como mínimo') ; return };
+
+        this.propertiesNonUndefinedCheck();
+
         return `${this.name} (${this.price}) [${this.size}]`;
     }
+
+
+
 }
 
 export const drymain = () => {
-    const bluePants = new Product({name:'Vaqueros',price:20,size:undefined});
+    const bluePants = new Product({name:'pantalon',price:20,size:'XXXL'});
     console.log(bluePants.toString());
 }
-
-//NO USES UN OBJETO PARA INSTANCIAR EL PRODUCTO, SOLO EN ESTA PRACTICA
