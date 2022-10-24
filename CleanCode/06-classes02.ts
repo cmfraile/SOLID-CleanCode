@@ -1,9 +1,13 @@
-//EJERCICIO SIN PRINCIPIO DE RESPONSABILIDAD ÚNICA APLICADO:
+// EJERCICIO PARA APLICAR EL PRINCIPIO DE LA RESPONSABILIDAD UNICO.
+// HAY QUE ANTEPONER LA COMPOSICIÓN A LA HERENCIA.
 
 type gender = 'M'|'F';
 interface person {name:string,gender:gender,birthdate:Date};
-interface user extends person {email:string,role:string,lastAccess?:Date};
-interface usersettings extends user {workingDirectory:string,lastFolder:string};
+interface user {email:string,role:string,lastAccess?:Date};
+interface usersettings {workingDirectory:string,lastFolder:string};
+
+interface userBundle {person:person,user:user,usersettings:usersettings};
+interface userBundleProps {name:string,gender:gender,birthdate:Date,email:string,role:string,workingDirectory:string,lastFolder:string}
 
 class Person {
 
@@ -15,23 +19,20 @@ class Person {
         this.name = name;
         this.gender = gender;
         this.birthdate = birthdate;
-        console.log(this);
     }
 
 }
 
-class User extends Person {
+class User {
     
     public email
     public role
-    private lastAccess
+    public lastAccess
 
-    constructor({name,gender,birthdate,email,role}:user){
-        super({name,gender,birthdate});
+    constructor({email,role}:user){
         this.email = email;
         this.role = role;
         this.lastAccess = new Date();
-        console.log(this);
     }
 
     public checkCredentials(){return true};
@@ -39,15 +40,29 @@ class User extends Person {
 }
 
 //Este entramado viola el principio de responsabilidad única:
-class UserSettings extends User {
+class UserSettings {
 
     public workingDirectory;
     public lastFolder;
 
-    constructor({name,gender,birthdate,email,role,workingDirectory,lastFolder}:usersettings){
-        super({name,gender,birthdate,email,role,lastAccess:new Date()});
+    constructor({workingDirectory,lastFolder}:usersettings){
         this.workingDirectory = workingDirectory;
         this.lastFolder = lastFolder;
+    }
+
+}
+
+class UserBundle {
+    
+    public person:person;
+    public user:user;
+    public userSettings:usersettings;
+
+    constructor({name,gender,birthdate,email,role,workingDirectory,lastFolder}:userBundleProps){
+        this.person = new Person({name,gender,birthdate});
+        this.user = new User({email,role});
+        this.userSettings = new UserSettings({workingDirectory,lastFolder});
+        console.clear();
         console.log(this);
     }
 
@@ -55,13 +70,13 @@ class UserSettings extends User {
 
 export const classes02main = () => {
     //const persona = new Person({name:'Carlos',gender:'M',birthdate:new Date('1993-03-19')});
-    const configuracionDeUsuario = new UserSettings({
-        name: 'Carlos',
+    new UserBundle({
+        name:'Carlos',
         gender:'M',
         birthdate:new Date('1993-03-19'),
-        email:'carlos@correo.com',
+        email:'carlos@correo.es',
         role:'admin',
-        workingDirectory:'fichero',
-        lastFolder:'fichero'
-    });
+        workingDirectory:'carpeta',
+        lastFolder:'carpeta'
+    })
 }
