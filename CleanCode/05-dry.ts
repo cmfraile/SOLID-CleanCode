@@ -1,5 +1,6 @@
 type size = 'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
-interface product {name?:string|undefined,price?:number|undefined,size?:size|undefined}
+interface product {name?:string|undefined,price?:number|undefined,size?:size|undefined};
+
 class Product {
 
     private name;
