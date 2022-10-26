@@ -1,3 +1,4 @@
+/*
 const Singleton = (function () {
     
     let instance;
@@ -25,3 +26,4 @@ function main() {
 }
 
 main();
+*/
