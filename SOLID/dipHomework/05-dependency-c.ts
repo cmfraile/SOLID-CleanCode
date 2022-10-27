@@ -1,5 +1,6 @@
 import { Post } from "./05-dependency-b";
 import JSONDB from './local-database.json';
+import axios from "axios";
 
 
 export abstract class DataProvider {
@@ -34,12 +35,22 @@ export class JsonDataBaseService implements DataProvider {
 }
 
 
-export class WebApiService implements PostProvider {
-    
+export class WebApiDataBaseService implements DataProvider {
+    private apiurl:string = 'https://jsonplaceholder.typicode.com/posts';
+    constructor(){}
     public async getPosts(): Promise<Post[]> {
-        const resp = await fetch('https://jsonplaceholder.typicode.com/posts');
-        return await resp.json();
+        return await axios.get(this.apiurl).then(resp => resp.data)
     }
 
+    /*
+    public async getPosts(): Promise<Post[]> {
+        return new Promise(async(rs,rj) => {
+            await axios.get(this.apiurl)
+            .then(({data}:any) => rs(data))
+            .catch(rj)
+        })
+    }
+    */
 }
+
 

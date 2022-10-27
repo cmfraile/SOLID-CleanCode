@@ -1,4 +1,4 @@
-import { DataProvider, LocalDataBaseService, WebApiService } from './05-dependency-c';
+import { DataProvider } from './05-dependency-c';
 
 export interface Post { body:string; id:number; title:string; userId:number };
 
