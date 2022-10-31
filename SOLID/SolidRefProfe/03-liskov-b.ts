@@ -18,6 +18,7 @@ export class Tesla extends Vehicle {
     getNumberOfSeats() {
         return this.numberOfSeats;
     }
+
 }
 
 export class Audi extends Vehicle{
